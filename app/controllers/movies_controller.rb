@@ -1,9 +1,14 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: %i[ show edit update destroy ]
-
+  $asc = 1
   # GET /movies or /movies.json
   def index
-    @movies = Movie.all
+    if $asc % 2 == 1
+      @movies = Movie.order(params[:sort])
+    else
+      @movies = Movie.order(params[:sort]).reverse_order
+    end
+    $asc = $asc % 2 + 1
   end
 
   # GET /movies/1 or /movies/1.json
