@@ -2,9 +2,19 @@
 
 <%= render @movie %>
 
-<div>
-  <%= link_to "Edit this movie", edit_movie_path(@movie) %> |
-  <%= link_to "Back to movies", movies_path %>
+<div >
+<table>
+  <tr scope="row">
+    <td class="<%= highlighted("title")%>">
+      <%= link_to "Edit this movie", edit_movie_path(@movie), class: "edit-button" %>  
+    </td>
+    <td lass="<%= highlighted("title")%>">
+      <%= link_to "Back to movies", movies_path, class: "back-button" %>
+    </td>
+    <td lass="<%= highlighted("title")%>">
+      <%= button_to "Destroy this movie", @movie, method: :delete, class: "destroy-button" %>        
+    </td>
+  </tr>
+</table>
 
-  <%= button_to "Destroy this movie", @movie, method: :delete %>
 </div>

@@ -12,26 +12,34 @@
   <% end %>
 
   <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+    <%= form.label :title, style: "display: block", class: "form-control" %>
+    <span>
+      <%= form.text_field :title %>
+    </span>
   </div>
 
   <div>
     <%= form.label :rating, style: "display: block" %>
-    <%= form.text_field :rating %>
+    <span>
+      <%= form.text_field :rating %>
+    </span>
   </div>
 
   <div>
     <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+    <span>
+      <%= form.text_field :description %>
+    </span>
   </div>
 
   <div>
     <%= form.label :release_date, style: "display: block" %>
-    <%= form.text_field :release_date %>
+    <span>
+      <%= form.text_field :release_date %>
+    </span>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Submit", class: "submit-button" %>
   </div>
 <% end %>
