@@ -6,27 +6,23 @@
 
 <table class="table table-striped table-hover" id="movie_table" width=100%>
   <thead class="bg-blak-100 border-b border-black-200">
-    <tr style="background-color: yellow">
-      <th scope="col"><%= link_to 'Title', :sort => 'title'%></th>
-      <th scope="col"><%= link_to 'Rating', :sort => 'rating'%></th>
-      <th scope="col"><%= link_to 'Release Date', :sort => 'release_date'%></th>
-      <th scope="col">Description</th>
+    <tr>
+      <th><%= sorting "title" , "Title" %></th>
+      <th><%= sorting "rating", "Rating" %></th>
+      <th><%= sorting "release_date", "Release Date" %></th>
     </tr>
   </thead>
   <tbody>
     <% @movies.each do |movie| %>
-      <tr style="background-color: green" scope="row">
-        <td width=15%>
-          <%= movie.title %>
+      <tr scope="row">
+        <td width=15% class="<%= highlighted("title")%>">
+          <%= link_to movie.title, movie %>
         </td>
-        <td width=5%>
+        <td width=5% class="<%= highlighted("rating")%>">
           <%= movie.rating %>
         </td>
-        <td width=15%>
+        <td width=15% class="<%= highlighted("release_date")%>">
           <%= movie.release_date %>
-        </td>
-        <td>
-          <%= movie.description %>          
         </td>
       </tr>
     <% end %>

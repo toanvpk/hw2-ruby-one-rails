@@ -1,14 +1,9 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: %i[ show edit update destroy ]
-  $asc = 1
-  # GET /movies or /movies.json
+  helper_method :sort_column, :sort_direction
+
   def index
-    if $asc % 2 == 1
-      @movies = Movie.order(params[:sort])
-    else
-      @movies = Movie.order(params[:sort]).reverse_order
-    end
-    $asc = $asc % 2 + 1
+    @movies = Movie.order(sort_column + " " + sort_direction)
   end
 
   # GET /movies/1 or /movies/1.json
@@ -63,10 +58,18 @@ class MoviesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_movie
-      @movie = Movie.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def sort_column
+    Movie.column_names.include?(params[:sort]) ? params[:sort] : "Title"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
+  def set_movie
+    @movie = Movie.find(params[:id])
+  end
 
     # Only allow a list of trusted parameters through.
     def movie_params
